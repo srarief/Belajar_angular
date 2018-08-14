@@ -62,7 +62,12 @@ export class AppComponent implements OnInit {
     const pred = await tf.tidy(() => {
 
       // Convert the canvas pixels to 
-      let img = tf.fromPixels(imageData, 1);
+
+      let rawImg = tf.fromPixels(imageData, 1);
+      let img: any;
+      img = tf.expandDims(rawImg, 0);
+      // console.log(img.shape);
+      // cnsole.log(img2.shape);
       img = img.reshape([1, 28, 28, 1]);
       img = tf.cast(img, 'float32');
 
